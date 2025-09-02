@@ -19,13 +19,13 @@ public class Product {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private String category;
+    @NotNull
+    private Category category;
 
     @NotNull
     private BigDecimal price;
 
-    public Product (String name, String category, BigDecimal price) {
+    public Product (String name, Category category, BigDecimal price) {
         this.name = name;
         this.category = category;
         this.price = price;
@@ -39,11 +39,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return this.category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
