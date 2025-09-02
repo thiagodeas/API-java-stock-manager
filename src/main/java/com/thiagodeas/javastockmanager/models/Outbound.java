@@ -1,8 +1,9 @@
 package com.thiagodeas.javastockmanager.models;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-import com.thiagodeas.javastockmanager.models.enums.InboundReason;
+import com.thiagodeas.javastockmanager.models.enums.OutboundReason;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,14 +16,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Inbound {
+public class Outbound {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private final InboundReason reason;
+    private final OutboundReason reason;
 
     @ManyToOne
     @NotNull
@@ -33,7 +34,7 @@ public class Inbound {
 
     private final LocalDateTime date;
 
-    public Inbound(InboundReason reason, Product product, String quantity) {
+    public Outbound(OutboundReason reason, Product product, String quantity) {
         this.reason = reason;
         this.product = product;
         this.quantity = quantity;
@@ -44,7 +45,7 @@ public class Inbound {
         return this.id;
     }
 
-     public InboundReason getReason() {
+    public OutboundReason getReason() {
         return this.reason;
     }
 
@@ -58,5 +59,30 @@ public class Inbound {
 
     public LocalDateTime getDate() {
         return this.date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Outbound outbound = (Outbound) o;
+
+        return id == outbound.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Outbound{" +
+        "id=" + id +
+        ", reason='" + reason +
+        ", product='" + product +
+        ", quantity='" + quantity +
+        ", date=" + date +
+        '}';
     }
 }
