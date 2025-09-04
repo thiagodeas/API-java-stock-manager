@@ -27,6 +27,8 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
+    public Product () {}
+
     public Product (String name, Category category, BigDecimal price) {
         this.name = name;
         this.category = category;
