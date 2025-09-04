@@ -22,16 +22,18 @@ public class Inbound {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private final InboundReason reason;
+    private InboundReason reason;
 
     @ManyToOne
     @NotNull
-    private final Product product;
+    private Product product;
 
     @NotBlank
-    private final String quantity;
+    private String quantity;
 
-    private final LocalDateTime date;
+    private LocalDateTime date;
+
+    public Inbound() {}
 
     public Inbound(InboundReason reason, Product product, String quantity) {
         this.reason = reason;
