@@ -23,17 +23,19 @@ public class Outbound {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private final OutboundReason reason;
+    private OutboundReason reason;
 
     @ManyToOne
     @NotNull
-    private final Product product;
+    private Product product;
 
     @NotBlank
-    private final String quantity;
+    private String quantity;
 
-    private final LocalDateTime date;
+    private LocalDateTime date;
 
+    public Outbound() {}
+    
     public Outbound(OutboundReason reason, Product product, String quantity) {
         this.reason = reason;
         this.product = product;
