@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.thiagodeas.javastockmanager.models.Category;
 import com.thiagodeas.javastockmanager.models.Product;
 
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     Product findByName(String name);
     List<Product> findByNameContaining(String name);
     List<Product> findByCategory(Category category);
