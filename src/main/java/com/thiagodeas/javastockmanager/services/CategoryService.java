@@ -19,18 +19,18 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<Category> findAllCategories() {
+    public List<Category> findAll() {
         return this.categoryRepository.findAll();
     }
     
-    public Category findCategoryById(int id) {
+    public Category findById(Long id) {
         Category category = this.categoryRepository.findById(id)
         .orElseThrow(() -> new CategoryNotFoundException());
 
         return category;
     }
 
-    public Category findCategoryByName(String name) {
+    public Category findByName(String name) {
         Category category = this.categoryRepository.findByName(name);
 
         if (category == null) {
@@ -40,7 +40,7 @@ public class CategoryService {
         return category;
     }
 
-    public List<Category> findCategoryByNameContaining(String name) {
+    public List<Category> findByNameContaining(String name) {
         List<Category> categories = this.categoryRepository.findByNameContaining(name);
 
         if (categories.isEmpty()) {
@@ -50,7 +50,7 @@ public class CategoryService {
         return categories;
     }
 
-    public Category createCategory(CategoryCreateDto dto) {
+    public Category create(CategoryCreateDto dto) {
         Category existingCategory = this.categoryRepository.findByName(dto.name());
 
         if (existingCategory != null) {
@@ -61,7 +61,7 @@ public class CategoryService {
         return this.categoryRepository.save(newCategory);
     }
 
-    public Category updateCategory(int id, CategoryUpdateDto dto) {
+    public Category update(Long id, CategoryUpdateDto dto) {
         Category category = this.categoryRepository.findById(id)
         .orElseThrow(() -> new CategoryNotFoundException());
 
@@ -72,7 +72,7 @@ public class CategoryService {
         return this.categoryRepository.save(category);
     }
 
-    public void deleteCategory(int id) {
+    public void delete(Long id) {
         Category category = this.categoryRepository.findById(id)
         .orElseThrow(() -> new CategoryNotFoundException());
 
