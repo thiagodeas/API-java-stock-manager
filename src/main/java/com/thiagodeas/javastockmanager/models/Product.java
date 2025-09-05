@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotNull;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(unique = true)
     @NotBlank
@@ -65,7 +65,7 @@ public class Product {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
 
-        return id == product.id &&
+        return Objects.equals(id, product.id) &&
                Objects.equals(name, product.name);
     }
 

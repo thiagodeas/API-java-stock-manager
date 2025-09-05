@@ -13,7 +13,7 @@ import jakarta.validation.constraints.NotBlank;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(unique = true)
     @NotBlank
@@ -23,10 +23,6 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return this.id;
     }
 
     public String getName() {
@@ -43,8 +39,8 @@ public class Category {
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
 
-        return id == category.id &&
-            Objects.equals(name, category.name);
+        return Objects.equals(id, category.id) &&
+               Objects.equals(name, category.name);
     }
 
     @Override

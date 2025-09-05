@@ -11,14 +11,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Inbound {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -28,7 +27,7 @@ public class Inbound {
     @NotNull
     private Product product;
 
-    @NotBlank
+    @NotNull
     private Integer quantity;
 
     @NotNull
@@ -41,10 +40,6 @@ public class Inbound {
         this.product = product;
         this.quantity = quantity;
         this.date = LocalDateTime.now();
-    }
-
-    public int getId() {
-        return this.id;
     }
 
      public InboundReason getReason() {
