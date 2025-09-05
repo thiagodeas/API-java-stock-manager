@@ -30,13 +30,14 @@ public class Outbound {
     private Product product;
 
     @NotBlank
-    private String quantity;
+    private Integer quantity;
 
+    @NotNull
     private LocalDateTime date;
 
     public Outbound() {}
     
-    public Outbound(OutboundReason reason, Product product, String quantity) {
+    public Outbound(OutboundReason reason, Product product, Integer quantity) {
         this.reason = reason;
         this.product = product;
         this.quantity = quantity;
@@ -55,7 +56,7 @@ public class Outbound {
         return this.product;
     }
 
-    public String getQuantity() {
+    public Integer getQuantity() {
         return this.quantity;
     }
 

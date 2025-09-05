@@ -29,13 +29,14 @@ public class Inbound {
     private Product product;
 
     @NotBlank
-    private String quantity;
+    private Integer quantity;
 
+    @NotNull
     private LocalDateTime date;
 
     public Inbound() {}
 
-    public Inbound(InboundReason reason, Product product, String quantity) {
+    public Inbound(InboundReason reason, Product product, Integer quantity) {
         this.reason = reason;
         this.product = product;
         this.quantity = quantity;
@@ -54,7 +55,7 @@ public class Inbound {
         return this.product;
     }
 
-    public String getQuantity() {
+    public Integer getQuantity() {
         return this.quantity;
     }
 

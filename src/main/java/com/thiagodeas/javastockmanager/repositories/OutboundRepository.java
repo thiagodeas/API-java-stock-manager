@@ -9,7 +9,7 @@ import com.thiagodeas.javastockmanager.models.Outbound;
 import com.thiagodeas.javastockmanager.models.enums.OutboundReason;
 
 public interface OutboundRepository extends JpaRepository<Outbound, Integer>{
-    List<Outbound> findByDateBetween(LocalDateTime start, LocalDateTime end);
+    List<Outbound> findByDateRange(LocalDateTime start, LocalDateTime end);
     List<Outbound> findByReason(OutboundReason reason);
-    List<Outbound> findByDateBetweenAndReason(LocalDateTime start, LocalDateTime end, OutboundReason reason);
+    List<Outbound> findByDateRangeAndReason(LocalDateTime start, LocalDateTime end, OutboundReason reason);
 }
