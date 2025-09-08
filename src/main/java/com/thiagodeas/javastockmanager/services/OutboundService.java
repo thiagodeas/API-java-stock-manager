@@ -5,50 +5,53 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.thiagodeas.javastockmanager.dto.InboundCreateDto;
+import com.thiagodeas.javastockmanager.dto.OutboundCreateDto;
 import com.thiagodeas.javastockmanager.exceptions.InvalidDateRangeException;
 import com.thiagodeas.javastockmanager.exceptions.InvalidReasonException;
 import com.thiagodeas.javastockmanager.exceptions.ProductNotFoundException;
-import com.thiagodeas.javastockmanager.models.Inbound;
+import com.thiagodeas.javastockmanager.models.Outbound;
 import com.thiagodeas.javastockmanager.models.Product;
-import com.thiagodeas.javastockmanager.models.enums.InboundReason;
-import com.thiagodeas.javastockmanager.repositories.InboundRepository;
+import com.thiagodeas.javastockmanager.models.enums.OutboundReason;
+import com.thiagodeas.javastockmanager.repositories.OutboundRepository;
 import com.thiagodeas.javastockmanager.repositories.ProductRepository;
 
 @Service
-public class InboundService {
-    private final InboundRepository inboundRepository;
-    private final ProductRepository productRepository;
+public class OutboundService {
+    private OutboundRepository outboundRepository;
+    private ProductRepository productRepository;
 
-    public InboundService(InboundRepository inboundRepository, ProductRepository productRepository) {
-        this.inboundRepository = inboundRepository;
+    public OutboundService() {}
+
+    public OutboundService(OutboundRepository outboundRepository, ProductRepository productRepository) {
+        this.outboundRepository = outboundRepository;
         this.productRepository = productRepository;
     }
 
-    public List<Inbound> findAll() {
-        return this.inboundRepository.findAll();
+    public List<Outbound> getAll() {
+        return this.outboundRepository.findAll();
     }
 
-    public List<Inbound> findByDateRange(LocalDateTime start, LocalDateTime end) {
+    public List<Outbound> findByDateRange(LocalDateTime start, LocalDateTime end) {
         if (start == null || end == null) {
             throw new InvalidDateRangeException("As datas de início e fim são obrigatórias.");
         }
+
         if (start.isAfter(end)) {
             throw new InvalidDateRangeException("A data de início deve ser anterior ou igual à data de fim.");
         }
 
-        return inboundRepository.findByDateRange(start, end);
+        return this.outboundRepository.findByDateRange(start, end);
     }
 
-    public List<Inbound> findByReason(InboundReason reason) {
+    public List<Outbound> findByReason(OutboundReason reason) {
         if (reason == null) {
             throw new InvalidReasonException("O campo motivo é obrigatório.");
         }
 
-        return this.inboundRepository.findByReason(reason);
+        return this.outboundRepository.findByReason(reason);
     }
 
-    List<Inbound> findByDateRangeAndReason(LocalDateTime start, LocalDateTime end, InboundReason reason) {
+    public List<Outbound> findByDateRangeAndReason(LocalDateTime start, LocalDateTime end, OutboundReason reason) {
         if (start == null || end == null) {
             throw new InvalidDateRangeException("As datas de início e fim são obrigatórias.");
         }
@@ -58,18 +61,18 @@ public class InboundService {
         }
 
         if (reason == null) {
-            throw new InvalidReasonException("O campo motivo é obrigatório.");        
+            throw new InvalidReasonException("O campo motivo é obrigatório.");
         }
 
-        return this.inboundRepository.findByDateRangeAndReason(start, end, reason);
+        return this.outboundRepository.findByDateRangeAndReason(start, end, reason);
     }
 
-    public Inbound create(InboundCreateDto dto) {
+    public Outbound create(OutboundCreateDto dto) {
         Product product = this.productRepository.findById(dto.productId())
         .orElseThrow(() -> new ProductNotFoundException());
 
-        Inbound inbound = new Inbound(dto.reason(), product, dto.quantity());
-        return this.inboundRepository.save(inbound);
-      
+        Outbound outbound = new Outbound(dto.reason(), product, dto.quantity());
+
+        return this.outboundRepository.save(outbound);
     }
 }
