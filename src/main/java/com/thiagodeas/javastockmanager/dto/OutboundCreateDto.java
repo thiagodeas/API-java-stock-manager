@@ -1,12 +1,12 @@
 package com.thiagodeas.javastockmanager.dto;
 
-import com.thiagodeas.javastockmanager.models.enums.InboundReason;
+import com.thiagodeas.javastockmanager.models.enums.OutboundReason;
 
 import jakarta.validation.constraints.NotNull;
 
-public record InboundCreateDto(
+public record OutboundCreateDto(
     @NotNull
-    InboundReason reason,
+    OutboundReason reason,
 
     @NotNull
     Long productId,
