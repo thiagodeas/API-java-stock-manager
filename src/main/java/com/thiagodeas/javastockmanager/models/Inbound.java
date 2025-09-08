@@ -1,6 +1,7 @@
 package com.thiagodeas.javastockmanager.models;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.thiagodeas.javastockmanager.models.enums.InboundReason;
 
@@ -42,6 +43,10 @@ public class Inbound {
         this.date = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
      public InboundReason getReason() {
         return this.reason;
     }
@@ -56,5 +61,30 @@ public class Inbound {
 
     public LocalDateTime getDate() {
         return this.date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Inbound inbound = (Inbound) o;
+
+        return Objects.equals(id, inbound.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Inbound{" +
+        "id=" + id +
+        ", product='" + product +
+        ", reason=" + reason +
+        ", quantity=" + quantity +
+        ", date =" + date +
+        '}';
     }
 }

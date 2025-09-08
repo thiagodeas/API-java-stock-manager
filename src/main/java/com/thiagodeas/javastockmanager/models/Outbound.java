@@ -43,6 +43,10 @@ public class Outbound {
         this.date = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
     public OutboundReason getReason() {
         return this.reason;
     }
