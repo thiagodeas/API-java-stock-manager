@@ -27,7 +27,7 @@ public class OutboundService {
         this.productRepository = productRepository;
     }
 
-    public List<Outbound> getAll() {
+    public List<Outbound> findAll() {
         return this.outboundRepository.findAll();
     }
 

@@ -48,7 +48,7 @@ public class InboundService {
         return this.inboundRepository.findByReason(reason);
     }
 
-    List<Inbound> findByDateRangeAndReason(LocalDateTime start, LocalDateTime end, InboundReason reason) {
+    public List<Inbound> findByDateRangeAndReason(LocalDateTime start, LocalDateTime end, InboundReason reason) {
         if (start == null || end == null) {
             throw new InvalidDateRangeException("As datas de início e fim são obrigatórias.");
         }
