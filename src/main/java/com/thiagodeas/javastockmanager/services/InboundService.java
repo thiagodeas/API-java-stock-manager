@@ -29,7 +29,7 @@ public class InboundService {
         return this.inboundRepository.findAll();
     }
 
-    public List<Inbound> findByDateRange(LocalDateTime start, LocalDateTime end) {
+    public List<Inbound> findByDateBetween(LocalDateTime start, LocalDateTime end) {
         if (start == null || end == null) {
             throw new InvalidDateRangeException("As datas de início e fim são obrigatórias.");
         }
@@ -37,7 +37,7 @@ public class InboundService {
             throw new InvalidDateRangeException("A data de início deve ser anterior ou igual à data de fim.");
         }
 
-        return inboundRepository.findByDateRange(start, end);
+        return inboundRepository.findByDateBetween(start, end);
     }
 
     public List<Inbound> findByReason(InboundReason reason) {
@@ -48,7 +48,7 @@ public class InboundService {
         return this.inboundRepository.findByReason(reason);
     }
 
-    public List<Inbound> findByDateRangeAndReason(LocalDateTime start, LocalDateTime end, InboundReason reason) {
+    public List<Inbound> findByDateBetweenAndReason(LocalDateTime start, LocalDateTime end, InboundReason reason) {
         if (start == null || end == null) {
             throw new InvalidDateRangeException("As datas de início e fim são obrigatórias.");
         }
@@ -61,7 +61,7 @@ public class InboundService {
             throw new InvalidReasonException("O campo motivo é obrigatório.");        
         }
 
-        return this.inboundRepository.findByDateRangeAndReason(start, end, reason);
+        return this.inboundRepository.findByDateBetweenAndReason(start, end, reason);
     }
 
     public Inbound create(InboundCreateDto dto) {
